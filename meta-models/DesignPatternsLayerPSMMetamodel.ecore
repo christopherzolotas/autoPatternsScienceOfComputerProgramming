@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="DesignPatternsLayerPSM" nsURI="platform:/plugin/eu.scasefp7.eclipse.mde.m2m/Metamodels/DesignPatternsLayerPSMMetamodel.ecore"
+    nsPrefix="Eu.fp7.scase">
+  <eClassifiers xsi:type="ecore:EClass" name="AnnotationModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasAnnotatedElement" lowerBound="1"
+        upperBound="-1" eType="#//AnnotatedElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasAnnotation" lowerBound="1"
+        upperBound="-1" eType="#//Annotation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotatesRESTfulServicePSM"
+        lowerBound="1" eType="ecore:EClass PSMMetamodel.ecore#//ServicePSM"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="annotationType" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="DesignPatternsLayer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnnotatedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Annotation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AnnPSMComponentProperty" eSuperTypes="#//AnnotatedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotatesPSMComponentProperty"
+        lowerBound="1" eType="ecore:EClass PSMMetamodel.ecore#//PSMComponentProperty"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnnJavaResourceModel" eSuperTypes="#//AnnotatedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotatesJavaResourceModel"
+        lowerBound="1" eType="ecore:EClass PSMMetamodel.ecore#//JavaResourceModel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnnJavaAlgoResourceModel" eSuperTypes="#//AnnotatedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotatesJavaAlgoResourceModel"
+        lowerBound="1" eType="ecore:EClass PSMMetamodel.ecore#//JavaAlgoResourceModel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DesignPattern" eSuperTypes="#//Annotation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JavaBridgePattern" eSuperTypes="#//DesignPattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associatesAnnJavaAlgoResourceModel"
+        lowerBound="1" upperBound="-1" eType="#//AnnJavaAlgoResourceModel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bMakeBridgePatternForExternalService"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bMakeBridgePatternForSearch"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"
+        defaultValueLiteral="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JavaBuilderPattern" eSuperTypes="#//DesignPattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasJavaDirector" lowerBound="1"
+        eType="#//JavaDirector" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associatesAnnJavaResourceModels"
+        lowerBound="1" upperBound="-1" eType="#//AnnJavaResourceModel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JavaDirector">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasJavaBuilder" lowerBound="1"
+        upperBound="-1" eType="#//JavaBuilder" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JavaConcreteBuilder" eSuperTypes="#//JavaBuilder">
+    <eOperations name="buildsJavaRepresentation" eType="#//JavaRepresentation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="buildsJavaRepresentation"
+        lowerBound="1" eType="#//JavaRepresentation" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JavaBuilder">
+    <eOperations name="buildsJavaRepresentation" eType="#//JavaRepresentation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associatesAnnJavaResourceModel"
+        lowerBound="1" eType="#//AnnJavaResourceModel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JavaRepresentation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refersTo" lowerBound="1"
+        eType="#//AnnJavaResourceModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="has" upperBound="-1" eType="#//AnnPSMComponentProperty"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceInstanceId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true" iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DesignPatternModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasDesignPattern" upperBound="-1"
+        eType="#//DesignPattern" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JavaObserverPattern" eSuperTypes="#//DesignPattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasJavaObserver" lowerBound="1"
+        upperBound="-1" eType="#//JavaObserver" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JavaObserver">
+    <eOperations name="update"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="observes" lowerBound="1"
+        eType="#//JavaObservableAnnHTTPActivityHandler"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referencesAnnJavaResourceModel"
+        lowerBound="1" eType="#//AnnJavaResourceModel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JavaObservableAnnHTTPActivityHandler"
+      eSuperTypes="#//Annotation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isObservedBy" upperBound="-1"
+        eType="#//JavaObserver"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referencesAnnJavaResourceModel"
+        lowerBound="1" eType="#//AnnJavaResourceModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extendsAnnJavaHTTPActivityHandler"
+        lowerBound="1" eType="#//AnnJavaHTTPActivityHandler"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnnJavaHTTPActivityHandler" eSuperTypes="#//AnnotatedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotatesHTTPActivityHandler"
+        eType="ecore:EClass PSMMetamodel.ecore#//HTTPActivityHandler"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JavaMementoPattern" eSuperTypes="#//DesignPattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasJavaResourceModelMemento"
+        lowerBound="1" upperBound="-1" eType="#//JavaResourceModelMemento" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JavaResourceModelMemento">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mementoNum" ordered="false"
+        unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Int"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referencesAnnJavaResourceModel"
+        lowerBound="1" eType="#//AnnJavaResourceModel"/>
+  </eClassifiers>
+</ecore:EPackage>

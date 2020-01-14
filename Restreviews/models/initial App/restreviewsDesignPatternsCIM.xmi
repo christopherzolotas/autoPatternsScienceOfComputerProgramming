@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Eu.fp7.scase:AnnotationModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Eu.fp7.scase="platform:/plugin/eu.scasefp7.eclipse.mde.m2m/Metamodels/DesignPatternsLayerCIMMetamodel.ecore" name="restreviewsDesignPatternsModel">
+  <hasAnnotatedElement xsi:type="Eu.fp7.scase:AnnResource">
+    <annotatesResource href="restreviewsCIM.xmi#//@hasResources.3"/>
+  </hasAnnotatedElement>
+  <hasAnnotatedElement xsi:type="Eu.fp7.scase:AnnProperty">
+    <annotatesProperty href="restreviewsCIM.xmi#//@hasResources.3/@hasProperty.0"/>
+  </hasAnnotatedElement>
+  <hasAnnotatedElement xsi:type="Eu.fp7.scase:AnnProperty">
+    <annotatesProperty href="restreviewsCIM.xmi#//@hasResources.3/@hasProperty.2"/>
+  </hasAnnotatedElement>
+  <hasAnnotatedElement xsi:type="Eu.fp7.scase:AnnResource">
+    <annotatesResource href="restreviewsCIM.xmi#//@hasResources.0"/>
+  </hasAnnotatedElement>
+  <hasAnnotatedElement xsi:type="Eu.fp7.scase:AnnCRUDActivity">
+    <annotatesCRUDActivity href="restreviewsCIM.xmi#//@hasResources.0/@hasCRUDActivity.1"/>
+  </hasAnnotatedElement>
+  <hasAnnotatedElement xsi:type="Eu.fp7.scase:AnnResource">
+    <annotatesResource href="restreviewsCIM.xmi#//@hasResources.5"/>
+  </hasAnnotatedElement>
+  <hasAnnotatedElement xsi:type="Eu.fp7.scase:AnnAlgoResource">
+    <annotatesAlgoResource href="restreviewsCIM.xmi#//@hasResources.2"/>
+  </hasAnnotatedElement>
+  <hasAnnotation xsi:type="Eu.fp7.scase:BuilderPattern" associatesAnnResource="//@hasAnnotatedElement.0">
+    <hasDirector>
+      <hasBuilder xsi:type="Eu.fp7.scase:ConcreteBuilder" associatesAnnResource="//@hasAnnotatedElement.0">
+        <buildsRepresentation name="account" has="//@hasAnnotatedElement.1 //@hasAnnotatedElement.2" refersTo="//@hasAnnotatedElement.0"/>
+      </hasBuilder>
+    </hasDirector>
+  </hasAnnotation>
+  <hasAnnotation xsi:type="Eu.fp7.scase:DesignPatternModel"/>
+  <hasAnnotation xsi:type="Eu.fp7.scase:DesignPatternModel"/>
+  <hasAnnotation xsi:type="Eu.fp7.scase:ObserverPattern">
+    <hasObserver name="Observe_0::review" observes="//@hasAnnotation.4" referencesAnnResource="//@hasAnnotatedElement.3"/>
+  </hasAnnotation>
+  <hasAnnotation xsi:type="Eu.fp7.scase:ObservableAnnCRUDActivity" referencesAnnResource="//@hasAnnotatedElement.3" isObservedby="Observe_0::review" extendsAnnCRUDActivity="//@hasAnnotatedElement.4"/>
+  <hasAnnotation xsi:type="Eu.fp7.scase:MementoPattern">
+    <hasMemento mementoNum="5" referencesAnnResource="//@hasAnnotatedElement.5"/>
+  </hasAnnotation>
+  <hasAnnotation xsi:type="Eu.fp7.scase:BridgePattern" associatesAnnAlgoResource="//@hasAnnotatedElement.6"/>
+</Eu.fp7.scase:AnnotationModel>

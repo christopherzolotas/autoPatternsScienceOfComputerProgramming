@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="DesignPatternsLayerPIM" nsURI="platform:/plugin/eu.scasefp7.eclipse.mde.m2m/Metamodels/DesignPatternsLayerPIMMetamodel.ecore"
+    nsPrefix="Eu.fp7.scase">
+  <eClassifiers xsi:type="ecore:EClass" name="AnnotationModel">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasAnnotatedElement" lowerBound="1"
+        upperBound="-1" eType="#//AnnotatedElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasAnnotation" lowerBound="1"
+        upperBound="-1" eType="#//Annotation" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnnotatedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Annotation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AnnPIMComponentProperty" eSuperTypes="#//AnnotatedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotatesPIMComponentProperty"
+        lowerBound="1" eType="ecore:EClass PIMMetamodel.ecore#//PIMComponentProperty"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnnResourceModel" eSuperTypes="#//AnnotatedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotatesResourceModel"
+        lowerBound="1" eType="ecore:EClass PIMMetamodel.ecore#//ResourceModel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnnAlgoResourceModel" eSuperTypes="#//AnnotatedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotatesAlgoResourceModel"
+        lowerBound="1" eType="ecore:EClass PIMMetamodel.ecore#//AlgoResourceModel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DesignPattern" eSuperTypes="#//Annotation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DesignPatternModel" eSuperTypes="#//Annotation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasDesignPattern" upperBound="-1"
+        eType="#//DesignPattern" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BridgePattern" eSuperTypes="#//DesignPattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associatesAnnAlgoResourceModel"
+        lowerBound="1" upperBound="-1" eType="#//AnnAlgoResourceModel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bMakeBridgePatternForExternalService"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bMakeBridgePatternForSearch"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"
+        defaultValueLiteral="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BuilderPattern" eSuperTypes="#//DesignPattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasDirector" lowerBound="1"
+        eType="#//Director" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associatesAnnResourceModel"
+        lowerBound="1" upperBound="-1" eType="#//AnnResourceModel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Director">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasBuilder" lowerBound="1"
+        upperBound="-1" eType="#//Builder" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Builder">
+    <eOperations name="buildRepresentation" eType="#//Representation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associatesAnnResourceModel"
+        lowerBound="1" eType="#//AnnResourceModel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConcreteBuilder" eSuperTypes="#//Builder">
+    <eOperations name="buildRepresentation" eType="#//Representation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="buildsRepresentation" lowerBound="1"
+        eType="#//Representation" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Representation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refersTo" lowerBound="1"
+        eType="#//AnnResourceModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="has" upperBound="-1" eType="#//AnnPIMComponentProperty"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceInstanceId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnnCRUDActivityHandler" eSuperTypes="#//AnnotatedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotatesCRUDActivityHandler"
+        lowerBound="1" eType="ecore:EClass PIMMetamodel.ecore#//CRUDActivityHandler"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObservableAnnCRUDActivityHandler">
+    <eOperations name="notifyObservers" eType="ecore:EEnum PIMMetamodel.ecore#//CRUDVerb"/>
+    <eOperations name="registerObserver"/>
+    <eOperations name="unregisterObserver"/>
+    <eOperations name="setState"/>
+    <eOperations name="getState" eType="ecore:EClass PIMMetamodel.ecore#//ResourceModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referencesAnnResourceModel"
+        lowerBound="1" eType="#//AnnResourceModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extendsAnnCRUDActivityHandler"
+        lowerBound="1" eType="#//AnnCRUDActivityHandler"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isObservedBy" upperBound="-1"
+        eType="#//Observer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObserverPattern" eSuperTypes="#//DesignPattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasObserver" lowerBound="1"
+        upperBound="-1" eType="#//Observer" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Observer">
+    <eOperations name="update"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="observes" lowerBound="1"
+        eType="#//ObservableAnnCRUDActivityHandler"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referencesAnnResourceModel"
+        lowerBound="1" eType="#//AnnResourceModel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MementoPattern" eSuperTypes="#//DesignPattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasPIMMemento" lowerBound="1"
+        upperBound="-1" eType="#//PIMMemento" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PIMMemento">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mementoNum" ordered="false"
+        unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Int"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referencesAnnResourceModel"
+        lowerBound="1" eType="#//AnnResourceModel"/>
+  </eClassifiers>
+</ecore:EPackage>
